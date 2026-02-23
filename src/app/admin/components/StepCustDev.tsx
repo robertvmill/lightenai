@@ -52,16 +52,30 @@ export default function StepCustDev({ onComplete, isComplete }: StepCustDevProps
   const [editingGoal, setEditingGoal] = useState<number | null>(null);
   const [agentChatSlot, setAgentChatSlot] = useState<number | null>(null);
   const [showPrepPanel, setShowPrepPanel] = useState(false);
+  const [inboxChecked, setInboxChecked] = useState(false);
 
-  // Load hypothesis & goals from localStorage
+  // Load inbox check + hypothesis & goals from localStorage
   useEffect(() => {
     try {
+      const today = new Date().toISOString().slice(0, 10);
+      const inboxSaved = localStorage.getItem("lighten-custdev-inbox");
+      if (inboxSaved) {
+        const parsed = JSON.parse(inboxSaved);
+        if (parsed.date === today) setInboxChecked(parsed.checked);
+      }
       const saved = localStorage.getItem(HYPOTHESIS_STORAGE_KEY);
       if (saved) setHypothesis(saved);
       const savedGoals = localStorage.getItem(GOALS_STORAGE_KEY);
       if (savedGoals) setGoals(JSON.parse(savedGoals));
     } catch { /* ignore */ }
   }, []);
+
+  const toggleInbox = () => {
+    const next = !inboxChecked;
+    setInboxChecked(next);
+    const today = new Date().toISOString().slice(0, 10);
+    localStorage.setItem("lighten-custdev-inbox", JSON.stringify({ date: today, checked: next }));
+  };
 
   // Save hypothesis
   useEffect(() => {
@@ -114,6 +128,38 @@ export default function StepCustDev({ onComplete, isComplete }: StepCustDevProps
 
   return (
     <div>
+      {/* Check Inbox */}
+      <div className="flex items-center gap-3 px-3 py-2.5 mb-4 rounded-xl border border-[#E8E6E1] bg-[#FAFAF8]">
+        <button
+          onClick={toggleInbox}
+          className={`w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition-colors duration-200 ${
+            inboxChecked
+              ? "bg-[#6B8F71] border-[#6B8F71]"
+              : "border-[#D1CFC9] hover:border-[#6B8F71]"
+          }`}
+        >
+          {inboxChecked && (
+            <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          )}
+        </button>
+        <div className="flex-1 min-w-0">
+          <span className={`text-sm ${inboxChecked ? "text-[#6B8F71] line-through" : "text-[#1C1C1C]"}`}>
+            Check inbox
+          </span>
+          <p className="text-xs text-[#999] mt-0.5">Review and respond to emails in Gmail</p>
+        </div>
+        <a
+          href="https://mail.google.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs text-[#6B8F71] hover:text-[#5A7D60] font-medium transition-colors shrink-0"
+        >
+          Open Gmail
+        </a>
+      </div>
+
       {/* Tab bar */}
       <div className="flex gap-1 mb-4 p-0.5 bg-[#F5F4F1] rounded-lg w-fit">
         <button
