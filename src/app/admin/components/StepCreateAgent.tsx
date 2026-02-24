@@ -204,6 +204,12 @@ export default function StepLeadOutreach({ onComplete, isComplete }: StepLeadOut
                 headerPortalRef={headerPortalRef}
                 initialPrompt={autoStartPrompt}
                 starterPrompts={agentConfig.starterPrompts}
+                fileUpload={{
+                  accept: "image/*",
+                  maxSizeMB: 20,
+                  endpoint: "/api/upload",
+                  imageEndpoint: "/api/fal/upload",
+                }}
               />
             </div>
           </div>

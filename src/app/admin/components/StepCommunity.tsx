@@ -213,25 +213,32 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
             </button>
           </div>
         ))}
-      </div>
 
-      {/* Add task */}
-      <div className="mt-3 flex items-center gap-2">
-        <input
-          type="text"
-          placeholder="Add a task (e.g., prepare for Thursday event)"
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && addTask()}
-          className="flex-1 bg-white border border-[#E8E6E1] rounded-lg px-3 py-2 text-sm outline-none placeholder-[#999] focus:border-[#6B8F71] transition-colors duration-200"
-        />
-        <button
-          onClick={addTask}
-          disabled={!newTask.trim() || isAdding}
-          className="px-3 py-2 rounded-lg bg-[#6B8F71] text-white text-sm font-medium hover:bg-[#5A7D60] disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-200"
-        >
-          Add
-        </button>
+        {/* Inline add task — looks like another checklist row */}
+        <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl border border-dashed border-[#E8E6E1] bg-white hover:border-[#6B8F71]/40 transition-colors duration-200">
+          <div className="w-5 h-5 rounded border-2 border-[#E8E6E1] flex items-center justify-center shrink-0">
+            <svg className="w-3 h-3 text-[#999]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </div>
+          <input
+            type="text"
+            placeholder="Add a task..."
+            value={newTask}
+            onChange={(e) => setNewTask(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && addTask()}
+            className="flex-1 bg-transparent text-sm outline-none placeholder-[#999] text-[#1C1C1C]"
+          />
+          {newTask.trim() && (
+            <button
+              onClick={addTask}
+              disabled={isAdding}
+              className="text-xs text-[#6B8F71] hover:text-[#5A7D60] font-medium transition-colors shrink-0 disabled:opacity-40"
+            >
+              {isAdding ? "Adding..." : "Add"}
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Mark complete */}
