@@ -29,7 +29,7 @@ const INFO_SECTIONS = [
   {
     title: "Architecture",
     items: [
-      "Runtime: Vercel ephemeral sandbox — each request is isolated",
+      "Runtime: E2B ephemeral sandbox — each request is isolated",
       "Streaming: Server-Sent Events (SSE) for real-time output",
       "Memory: Full conversation history passed with each request",
     ],
@@ -39,20 +39,30 @@ const INFO_SECTIONS = [
     items: [
       "API route: Next.js App Router (POST /api/agents/sdk-tutor)",
       "LLM: Claude via Anthropic API",
-      "Execution: Vercel Sandbox (runAgentInSandbox)",
+      "Execution: E2B Sandbox (runAgentInSandbox)",
       "Frontend: React with dynamic import (no SSR)",
       "Chat UI: AgentChat component with SSE streaming",
     ],
   },
 ];
 
-type ShelfTab = "prompt" | "tools" | "info";
+type ShelfTab = "prompt" | "tools" | "history" | "info";
 
 interface AgentConfig {
   systemPrompt: string;
   allowedTools: string[];
   isOverride: boolean;
   updatedAt?: string;
+}
+
+interface ConfigVersion {
+  id: string;
+  agent_id: string;
+  source: string;
+  note: string | null;
+  allowed_tools: string[];
+  created_at: string;
+  system_prompt?: string;
 }
 
 interface QuizScore {
@@ -102,6 +112,26 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
   const [configSaving, setConfigSaving] = useState(false);
   const [configSaved, setConfigSaved] = useState(false);
   const [configError, setConfigError] = useState<string | null>(null);
+
+  // Version history state
+  const [versions, setVersions] = useState<ConfigVersion[]>([]);
+  const [versionsLoaded, setVersionsLoaded] = useState(false);
+  const [expandedVersionId, setExpandedVersionId] = useState<string | null>(null);
+  const [expandedVersionPrompt, setExpandedVersionPrompt] = useState<string | null>(null);
+
+  // Load version history
+  const loadVersions = useCallback(async () => {
+    try {
+      const res = await fetch("/api/agents/config/sdk-tutor/versions");
+      if (res.ok) {
+        const data: ConfigVersion[] = await res.json();
+        setVersions(data);
+        setVersionsLoaded(true);
+      }
+    } catch {
+      // silently fail
+    }
+  }, []);
 
   // Load quiz scores from Supabase
   useEffect(() => {
@@ -163,6 +193,8 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
         setConfig(data);
         setConfigSaved(true);
         setTimeout(() => setConfigSaved(false), 2000);
+        // Refresh version history
+        if (versionsLoaded) loadVersions();
       } else {
         const err = await res.json();
         setConfigError(err.error || "Failed to save");
@@ -172,7 +204,7 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
     } finally {
       setConfigSaving(false);
     }
-  }, [editedPrompt, editedTools]);
+  }, [editedPrompt, editedTools, versionsLoaded, loadVersions]);
 
   const handleResetConfig = useCallback(async () => {
     setConfigSaving(true);
@@ -202,6 +234,41 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
         ? prev.filter((t) => t !== toolName)
         : [...prev, toolName]
     );
+  }, []);
+
+  // Load versions on first History tab visit
+  useEffect(() => {
+    if (activeTab === "history" && !versionsLoaded) {
+      loadVersions();
+    }
+  }, [activeTab, versionsLoaded, loadVersions]);
+
+  // Expand a version to see its full prompt
+  const handleExpandVersion = useCallback(async (versionId: string) => {
+    if (expandedVersionId === versionId) {
+      setExpandedVersionId(null);
+      setExpandedVersionPrompt(null);
+      return;
+    }
+    setExpandedVersionId(versionId);
+    setExpandedVersionPrompt(null);
+    try {
+      const res = await fetch(`/api/agents/config/sdk-tutor/versions?id=${versionId}`);
+      if (res.ok) {
+        const data = await res.json();
+        setExpandedVersionPrompt(data.system_prompt);
+      }
+    } catch {
+      setExpandedVersionPrompt("Failed to load prompt");
+    }
+  }, [expandedVersionId]);
+
+  // Restore a version into the editor
+  const handleRestoreVersion = useCallback((prompt: string) => {
+    setEditedPrompt(prompt);
+    setExpandedVersionId(null);
+    setExpandedVersionPrompt(null);
+    setActiveTab("prompt");
   }, []);
 
   // Handle quiz score detection from AgentChat
@@ -475,7 +542,7 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
 
                 {/* Tabs */}
                 <div className="flex border-b border-[#E8E6E1] shrink-0">
-                  {(["prompt", "tools", "info"] as ShelfTab[]).map((tab) => (
+                  {(["prompt", "tools", "history", "info"] as ShelfTab[]).map((tab) => (
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
@@ -531,6 +598,75 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
                                 <p className="text-[11px] text-[#666] mt-0.5">{tool.description}</p>
                               </div>
                             </label>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* History tab */}
+                      {activeTab === "history" && (
+                        <div className="p-4 space-y-2">
+                          {versions.length === 0 && versionsLoaded && (
+                            <p className="text-xs text-[#999] text-center py-8">No versions yet. Save a config to start tracking history.</p>
+                          )}
+                          {!versionsLoaded && (
+                            <div className="flex items-center justify-center py-8">
+                              <div className="w-5 h-5 border-2 border-[#6B8F71]/30 border-t-[#6B8F71] rounded-full animate-spin" />
+                            </div>
+                          )}
+                          {versions.map((v) => (
+                            <div key={v.id} className="border border-[#E8E6E1] rounded-lg overflow-hidden">
+                              <button
+                                onClick={() => handleExpandVersion(v.id)}
+                                className="w-full flex items-center gap-2 px-3 py-2.5 text-left hover:bg-[#FAFAF8] transition-colors"
+                              >
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2">
+                                    <span className={`inline-block px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${
+                                      v.source === "ui"
+                                        ? "bg-[#6B8F71]/10 text-[#6B8F71]"
+                                        : v.source === "code"
+                                          ? "bg-blue-50 text-blue-600"
+                                          : "bg-gray-100 text-gray-500"
+                                    }`}>
+                                      {v.source}
+                                    </span>
+                                    <span className="text-[11px] text-[#999]">
+                                      {new Date(v.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                                      {" "}
+                                      {new Date(v.created_at).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}
+                                    </span>
+                                  </div>
+                                  {v.note && (
+                                    <p className="text-[11px] text-[#666] mt-1 truncate">{v.note}</p>
+                                  )}
+                                </div>
+                                <svg className={`w-3.5 h-3.5 text-[#999] shrink-0 transition-transform ${expandedVersionId === v.id ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                </svg>
+                              </button>
+
+                              {expandedVersionId === v.id && (
+                                <div className="border-t border-[#E8E6E1]">
+                                  {expandedVersionPrompt === null ? (
+                                    <div className="flex items-center justify-center py-6">
+                                      <div className="w-4 h-4 border-2 border-[#6B8F71]/30 border-t-[#6B8F71] rounded-full animate-spin" />
+                                    </div>
+                                  ) : (
+                                    <>
+                                      <pre className="p-3 text-[11px] leading-relaxed font-mono text-[#555] bg-[#FAFAF8] max-h-64 overflow-y-auto whitespace-pre-wrap">{expandedVersionPrompt}</pre>
+                                      <div className="p-2 border-t border-[#E8E6E1] bg-white">
+                                        <button
+                                          onClick={() => handleRestoreVersion(expandedVersionPrompt)}
+                                          className="w-full py-1.5 rounded-md text-[11px] font-semibold uppercase tracking-[0.1em] bg-[#6B8F71]/10 text-[#6B8F71] hover:bg-[#6B8F71]/20 transition-colors"
+                                        >
+                                          Restore this version
+                                        </button>
+                                      </div>
+                                    </>
+                                  )}
+                                </div>
+                              )}
+                            </div>
                           ))}
                         </div>
                       )}
