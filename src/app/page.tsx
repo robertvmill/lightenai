@@ -396,55 +396,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── OUTCOMES ─── */}
-      <section className="max-w-6xl mx-auto px-6 py-20 md:py-28">
-        <AnimateIn animation="fade-up">
-          <div className="text-center mb-14">
-            <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">OUTCOMES</p>
-            <h2 className="font-sans font-light text-3xl md:text-5xl leading-[1.1] tracking-tight">
-              What changes when AI works for you.
-            </h2>
-          </div>
-        </AnimateIn>
-
-        <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {[
-            {
-              title: "Profit Growth",
-              description: "Recapture lost revenue from slow follow-ups, missed leads, and manual bottlenecks. AI agents close the gaps that quietly drain your bottom line.",
-              icon: "M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.281m5.94 2.28l-2.28 5.941",
-            },
-            {
-              title: "Efficiency",
-              description: "Eliminate hours of repetitive work across sales, support, marketing, and admin. Your team focuses on high-value decisions while agents handle the rest.",
-              icon: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z",
-            },
-            {
-              title: "Competitive Advantage",
-              description: "Move faster than competitors still doing everything manually. AI agents let a lean team operate with the output and speed of one ten times its size.",
-              icon: "M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z",
-            },
-            {
-              title: "Clarity",
-              description: "Stop guessing where your time and money go. We put a dollar sign on every inefficiency so you can make decisions based on data, not gut feelings.",
-              icon: "M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178zM15 12a3 3 0 11-6 0 3 3 0 016 0z",
-            },
-          ].map((outcome, i) => (
-            <AnimateIn key={outcome.title} animation="fade-up" delay={i * 100}>
-              <div className="bg-white border border-[#E8E6E1] rounded-2xl p-8 h-full">
-                <div className="w-12 h-12 rounded-full bg-[#6B8F71]/10 flex items-center justify-center mb-5">
-                  <svg className="w-6 h-6 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d={outcome.icon} />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-3">{outcome.title}</h3>
-                <p className="text-[#666] leading-relaxed">{outcome.description}</p>
-              </div>
-            </AnimateIn>
-          ))}
-        </div>
-      </section>
-
       {/* ─── FAQ ─── */}
       <section className="bg-[#1C1C1C] text-white">
         <div className="max-w-3xl mx-auto px-6 py-20 md:py-28">
