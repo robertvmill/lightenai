@@ -53,7 +53,10 @@ export function Footer() {
 
       {/* Bottom bar */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-[#E8E6E1]">
-        <span className="text-xs text-[#999]">&copy; {new Date().getFullYear()} Lighten AI. All rights reserved.</span>
+        <div className="flex flex-col items-center sm:items-start gap-1">
+          <span className="text-xs text-[#999]">&copy; {new Date().getFullYear()} Lighten AI. All rights reserved.</span>
+          <span className="text-xs text-[#999]">1001508680 ONTARIO INC.</span>
+        </div>
         <div className="flex items-center gap-6 text-xs text-[#999]">
           <span className="hover:text-[#666] transition-colors cursor-pointer">Privacy</span>
           <span className="hover:text-[#666] transition-colors cursor-pointer">Terms</span>
