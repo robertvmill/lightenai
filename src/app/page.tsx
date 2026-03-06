@@ -107,7 +107,7 @@ export default function Home() {
         <HeroBackground />
         <div className="max-w-6xl mx-auto px-6 py-14 md:py-20 lg:py-24 text-center relative z-10">
           <AnimateIn animation="fade-up">
-            <h1 className="font-sans font-light text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-6">
+            <h1 className="font-display font-semibold text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-6">
               Run your business with <span className="text-[#6B8F71]">AI agents.</span>
             </h1>
           </AnimateIn>
@@ -141,7 +141,7 @@ export default function Home() {
           <AnimateIn animation="fade-up">
             <div className="text-center mb-16">
               <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">OUR VALUES</p>
-              <h2 className="font-sans font-light text-3xl md:text-5xl leading-[1.1] tracking-tight">
+              <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight">
                 What we stand for.
               </h2>
             </div>
@@ -199,7 +199,7 @@ export default function Home() {
           <AnimateIn animation="fade-up">
             <div className="text-center mb-12">
               <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">REVIEWS</p>
-              <h2 className="font-sans font-light text-3xl md:text-5xl leading-[1.1] tracking-tight">
+              <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight">
                 What our clients say.
               </h2>
             </div>
@@ -218,7 +218,7 @@ export default function Home() {
         <AnimateIn animation="fade-up">
           <div className="text-center mb-14">
             <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">SOUND FAMILIAR?</p>
-            <h2 className="font-sans font-light text-3xl md:text-5xl leading-[1.1] tracking-tight">Problems we solve.</h2>
+            <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight">Problems we solve.</h2>
           </div>
         </AnimateIn>
 
@@ -250,7 +250,7 @@ export default function Home() {
           <AnimateIn animation="fade-up">
             <div className="text-center mb-14">
               <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">WHAT WE DO</p>
-              <h2 className="font-sans font-light text-3xl md:text-5xl leading-[1.1] tracking-tight">
+              <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight">
                 We expose the gaps. Then we close them.
               </h2>
             </div>
@@ -288,7 +288,7 @@ export default function Home() {
             {METRICS.map((metric, i) => (
               <AnimateIn key={metric.label} animation="fade-up" delay={i * 100}>
                 <div className="text-center">
-                  <p className="text-4xl md:text-5xl font-sans font-light text-white">
+                  <p className="text-4xl md:text-5xl font-display font-semibold text-white">
                     <CountUp end={metric.end} suffix={metric.suffix} />
                   </p>
                   <p className="text-xs text-white/50 uppercase tracking-[0.15em] mt-2">{metric.label}</p>
@@ -310,7 +310,7 @@ export default function Home() {
                 <AnimateIn animation={isReversed ? "slide-left" : "slide-right"} className={isReversed ? "lg:order-2" : ""}>
                   <div>
                     <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">{feature.label}</p>
-                    <h2 className="font-sans font-light text-3xl md:text-5xl leading-[1.1] tracking-tight mb-6">{feature.title}</h2>
+                    <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight mb-6">{feature.title}</h2>
                     <p className="text-[#555] text-lg leading-relaxed mb-8">{feature.description}</p>
                     <Link
                       href="/offer"
@@ -345,7 +345,7 @@ export default function Home() {
           <AnimateIn animation="fade-up">
             <div className="text-center mb-16">
               <p className="text-xs font-semibold text-white/70 uppercase tracking-[0.15em] mb-4">WHAT WE BUILD</p>
-              <h2 className="font-sans font-light text-3xl md:text-5xl leading-[1.1] tracking-tight">
+              <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight">
                 AI agents built<br className="hidden md:block" /> for your content.
               </h2>
             </div>
@@ -374,7 +374,7 @@ export default function Home() {
         <AnimateIn animation="fade-up">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">PROCESS</p>
-            <h2 className="font-sans font-light text-3xl md:text-5xl leading-[1.1] tracking-tight">Three steps to lighter content.</h2>
+            <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight">Three steps to lighter content.</h2>
           </div>
         </AnimateIn>
 
@@ -385,7 +385,7 @@ export default function Home() {
           {HOW_IT_WORKS.map((item, i) => (
             <AnimateIn key={item.step} animation="fade-up" delay={i * 150}>
               <div className="text-center relative">
-                <div className="w-12 h-12 rounded-full bg-[#6B8F71] text-white flex items-center justify-center mx-auto mb-6 text-lg font-sans font-light relative z-10">
+                <div className="w-12 h-12 rounded-full bg-[#6B8F71] text-white flex items-center justify-center mx-auto mb-6 text-lg font-display font-semibold relative z-10">
                   {item.step}
                 </div>
                 <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
@@ -402,7 +402,7 @@ export default function Home() {
           <AnimateIn animation="fade-up">
             <div className="mb-12">
               <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">FAQ</p>
-              <h2 className="font-sans font-light text-3xl md:text-5xl leading-[1.1] tracking-tight">
+              <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight">
                 Frequently asked questions.
               </h2>
             </div>
@@ -417,7 +417,7 @@ export default function Home() {
           <AnimateIn animation="fade-up">
             <div className="text-center mb-6">
               <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-3">GET IN TOUCH</p>
-              <h2 className="font-sans font-light text-3xl md:text-4xl leading-[1.1] tracking-tight mb-3">
+              <h2 className="font-display font-semibold text-3xl md:text-4xl leading-[1.1] tracking-tight mb-3">
                 Let&apos;s start with an AI growth<br className="hidden md:block" /> and profit assessment.
               </h2>
               <p className="text-base text-[#555] max-w-xl mx-auto">
@@ -441,7 +441,7 @@ export default function Home() {
         <GrainTexture density={0.3} />
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28 text-center">
           <AnimateIn animation="fade-up">
-            <h2 className="font-sans font-light text-3xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight mb-6">
+            <h2 className="font-display font-semibold text-3xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight mb-6">
               Ready to create more<br className="hidden md:block" /> <span className="italic text-white/90">with less effort?</span>
             </h2>
             <p className="text-lg text-white/60 mb-10 max-w-xl mx-auto">

@@ -82,7 +82,7 @@ export default function OfferPage() {
         <HeroBackground />
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-28 lg:py-32 text-center relative z-10">
           <AnimateIn animation="fade-up">
-            <h1 className="font-sans font-light text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-6">
+            <h1 className="font-display font-semibold text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-6">
               Agentic AI <span className="text-[#6B8F71]">Engineers.</span>
             </h1>
           </AnimateIn>
@@ -102,7 +102,7 @@ export default function OfferPage() {
           <AnimateIn animation="fade-up">
             <div className="max-w-3xl mb-16">
               <p className="text-xs font-semibold text-white/70 uppercase tracking-[0.15em] mb-4">THE PROFIT GAP</p>
-              <h2 className="font-sans font-light text-3xl md:text-5xl leading-[1.1] tracking-tight mb-6">
+              <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight mb-6">
                 Great businesses, weighed down by manual work.
               </h2>
               <p className="text-white/60 leading-relaxed text-lg">
@@ -133,7 +133,7 @@ export default function OfferPage() {
 
           <AnimateIn animation="fade-up" delay={400}>
             <div className="mt-12 border border-white/15 rounded-2xl p-8 lg:p-10">
-              <p className="text-xl font-sans font-light mb-2">
+              <p className="text-xl font-display font-semibold mb-2">
                 The real question isn&apos;t &ldquo;Should we use AI?&rdquo;
               </p>
               <p className="text-white/60 leading-relaxed">
@@ -149,7 +149,7 @@ export default function OfferPage() {
         <AnimateIn animation="fade-up">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">OUR PROCESS</p>
-            <h2 className="font-sans font-light text-3xl md:text-5xl leading-[1.1] tracking-tight mb-6">
+            <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight mb-6">
               Three steps to a lighter workload.
             </h2>
             <p className="text-[#555] text-lg leading-relaxed">
@@ -165,11 +165,11 @@ export default function OfferPage() {
                 <div className="grid lg:grid-cols-[1fr,1.2fr] gap-8 items-start">
                   <div>
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 rounded-full bg-[#6B8F71] text-white flex items-center justify-center font-sans font-light text-lg">
+                      <div className="w-12 h-12 rounded-full bg-[#6B8F71] text-white flex items-center justify-center font-display font-semibold text-lg">
                         {step.step}
                       </div>
                     </div>
-                    <h3 className="font-sans font-light text-2xl md:text-3xl mb-3">{step.title}</h3>
+                    <h3 className="font-display font-semibold text-2xl md:text-3xl mb-3">{step.title}</h3>
                     <p className="text-[#555] leading-relaxed">{step.description}</p>
                   </div>
                   <div className="bg-[#FAFAF8] rounded-xl p-6">
@@ -199,7 +199,7 @@ export default function OfferPage() {
           <AnimateIn animation="fade-up">
             <div className="max-w-3xl mx-auto text-center">
               <p className="text-xs font-semibold text-white/70 uppercase tracking-[0.15em] mb-4">THE MATH</p>
-              <h2 className="font-sans font-light text-3xl md:text-5xl leading-[1.1] tracking-tight mb-6">
+              <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight mb-6">
                 Do more without hiring more.
               </h2>
               <p className="text-white/60 text-lg leading-relaxed mb-10">
@@ -217,7 +217,7 @@ export default function OfferPage() {
           <AnimateIn animation="fade-up">
             <div>
               <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">IS THIS FOR YOU?</p>
-              <h2 className="font-sans font-light text-3xl md:text-5xl leading-[1.1] tracking-tight mb-6">
+              <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight mb-6">
                 For businesses ready to work smarter.
               </h2>
               <p className="text-[#555] text-lg leading-relaxed">
@@ -253,7 +253,7 @@ export default function OfferPage() {
           <AnimateIn animation="fade-up">
             <div className="text-center mb-12">
               <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">NEXT STEP</p>
-              <h2 className="font-sans font-light text-3xl md:text-5xl leading-[1.1] tracking-tight mb-4">Start with a process audit.</h2>
+              <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight mb-4">Start with a process audit.</h2>
               <p className="text-lg text-[#555] max-w-xl mx-auto mb-6">
                 Book a call and we&apos;ll show you exactly where AI agents can save time, cut costs, and lighten your workload.
               </p>
@@ -292,7 +292,7 @@ export default function OfferPage() {
         <GrainTexture density={0.3} />
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28 text-center">
           <AnimateIn animation="fade-up">
-            <h2 className="font-sans font-light text-3xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight mb-6">
+            <h2 className="font-display font-semibold text-3xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight mb-6">
               Ready to lighten<br className="hidden md:block" /> <span className="italic text-white/90">your workload?</span>
             </h2>
             <p className="text-lg text-white/60 mb-10 max-w-xl mx-auto">
