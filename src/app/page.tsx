@@ -30,6 +30,12 @@ const AI_SYSTEMS = [
   { name: "Email & Newsletter Agents", description: "AI agents that craft email sequences, newsletters, and drip campaigns. Personalized messaging at scale.", icon: "M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" },
 ] as const;
 
+const VALUES = [
+  { title: "Trust", icon: "M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z", description: "Trust is the foundation of every relationship we build. Our clients and vendors rely on us to be transparent, dependable, and to always act in their best interest." },
+  { title: "Client Success", icon: "M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z", description: "If our clients aren\u2019t succeeding, we\u2019re not succeeding. We measure our impact by the real results our clients achieve\u2014their growth is our growth." },
+  { title: "Innovation", icon: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z", description: "We relentlessly innovate and improve ourselves every day. The AI landscape moves fast, and we make sure our clients are always ahead of the curve." },
+] as const;
+
 const METRICS = [
   { end: 50, suffix: "+", label: "AI agents deployed" },
   { end: 10, suffix: "x", label: "Content output" },
@@ -148,47 +154,19 @@ export default function Home() {
           </AnimateIn>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <AnimateIn animation="fade-up" delay={0}>
-              <div className="text-center px-4">
-                <div className="w-14 h-14 mx-auto mb-6 rounded-2xl bg-[#6B8F71]/10 flex items-center justify-center">
-                  <svg className="w-7 h-7 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                  </svg>
+            {VALUES.map((value, i) => (
+              <AnimateIn key={value.title} animation="fade-up" delay={i * 100}>
+                <div className="text-center px-4">
+                  <div className="w-14 h-14 mx-auto mb-6 rounded-2xl bg-[#6B8F71]/10 flex items-center justify-center">
+                    <svg className="w-7 h-7 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d={value.icon} />
+                    </svg>
+                  </div>
+                  <h3 className="font-sans font-semibold text-xl mb-3">{value.title}</h3>
+                  <p className="text-[#666] leading-relaxed">{value.description}</p>
                 </div>
-                <h3 className="font-sans font-semibold text-xl mb-3">Trust</h3>
-                <p className="text-[#666] leading-relaxed">
-                  Trust is the foundation of every relationship we build. Our clients and vendors rely on us to be transparent, dependable, and to always act in their best interest.
-                </p>
-              </div>
-            </AnimateIn>
-
-            <AnimateIn animation="fade-up" delay={100}>
-              <div className="text-center px-4">
-                <div className="w-14 h-14 mx-auto mb-6 rounded-2xl bg-[#6B8F71]/10 flex items-center justify-center">
-                  <svg className="w-7 h-7 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-                  </svg>
-                </div>
-                <h3 className="font-sans font-semibold text-xl mb-3">Client Success</h3>
-                <p className="text-[#666] leading-relaxed">
-                  If our clients aren&apos;t succeeding, we&apos;re not succeeding. We measure our impact by the real results our clients achieve—their growth is our growth.
-                </p>
-              </div>
-            </AnimateIn>
-
-            <AnimateIn animation="fade-up" delay={200}>
-              <div className="text-center px-4">
-                <div className="w-14 h-14 mx-auto mb-6 rounded-2xl bg-[#6B8F71]/10 flex items-center justify-center">
-                  <svg className="w-7 h-7 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                  </svg>
-                </div>
-                <h3 className="font-sans font-semibold text-xl mb-3">Innovation</h3>
-                <p className="text-[#666] leading-relaxed">
-                  We relentlessly innovate and improve ourselves every day. The AI landscape moves fast, and we make sure our clients are always ahead of the curve.
-                </p>
-              </div>
-            </AnimateIn>
+              </AnimateIn>
+            ))}
           </div>
         </div>
       </section>
